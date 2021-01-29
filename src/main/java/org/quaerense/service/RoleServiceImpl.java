@@ -27,12 +27,6 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     @Transactional
-    public Role getRoleById(Integer id) {
-        return roleDao.getRoleById(id);
-    }
-
-    @Override
-    @Transactional
     public void updateRole(Role role) {
         roleDao.updateRole(role);
     }

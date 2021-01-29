@@ -23,11 +23,6 @@ public class RoleDaoImpl implements RoleDao {
     }
 
     @Override
-    public Role getRoleById(Integer id) {
-        return entityManager.find(Role.class, id);
-    }
-
-    @Override
     public void updateRole(Role role) {
         entityManager.merge(role);
     }
