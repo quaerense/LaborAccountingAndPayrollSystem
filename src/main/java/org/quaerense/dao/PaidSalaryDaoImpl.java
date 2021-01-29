@@ -20,7 +20,8 @@ public class PaidSalaryDaoImpl implements PaidSalaryDao {
     @Override
     public List<PaidSalary> getAllPaidSalariesByEmployeeId(Integer id) {
         return entityManager
-                .createQuery("SELECT ps FROM PaidSalary ps WHERE ps.employee.id = :id", PaidSalary.class)
+                .createQuery("SELECT ps FROM PaidSalary ps WHERE ps.employee.id = :employeeId", PaidSalary.class)
+                .setParameter("employeeId", id)
                 .getResultList();
     }
 }
