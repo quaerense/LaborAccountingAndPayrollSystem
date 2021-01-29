@@ -1,5 +1,7 @@
 package org.quaerense.domain;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
@@ -14,7 +16,8 @@ public class Employee {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "login", nullable = false)
+    @Column(name = "login", nullable = false, unique = true)
+    @Length(min = 4, max = 16)
     private String login;
 
     @Column(name = "password", nullable = false)
@@ -33,10 +36,10 @@ public class Employee {
     private Date dateOfBirth;
 
     @Email
-    @Column(name = "email")
+    @Column(name = "email", unique = true, length = 128)
     private String email;
 
-    @Column(name = "phone_number")
+    @Column(name = "phone_number", unique = true, length = 32)
     private String phoneNumber;
 
     @Column(name = "account_number", nullable = false)

@@ -24,7 +24,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public Employee getEmployeeById(Integer id) {
-        return entityManager.find(Employee.class, 1L);
+        return entityManager.find(Employee.class, id);
     }
 
     @Override
