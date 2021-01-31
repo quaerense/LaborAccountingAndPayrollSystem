@@ -31,7 +31,7 @@ public class Employee {
     @Column(name = "patronymic")
     private String patronymic;
 
-    @Column(name = "date_of_birth", nullable = false)
+    @Column(name = "date_of_birth")
     private Date dateOfBirth;
 
     @Email

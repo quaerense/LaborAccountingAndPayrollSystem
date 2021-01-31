@@ -12,7 +12,7 @@ import java.io.File;
 import java.util.List;
 
 @Service
-@PropertySource("classpath:config.properties")
+@PropertySource("classpath:application.properties")
 public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private EmployeeDao employeeDao;
@@ -25,7 +25,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void addEmployee(Employee employee) {
         employeeDao.addEmployee(employee);
 
-        new File(environment.getProperty("user.files") + "/" + employee.getLogin()).mkdirs();
+        new File(environment.getProperty("user.files.directory") + "/" + employee.getLogin()).mkdirs();
     }
 
     @Override
