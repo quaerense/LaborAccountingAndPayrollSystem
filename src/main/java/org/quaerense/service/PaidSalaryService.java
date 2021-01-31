@@ -7,5 +7,5 @@ import java.util.List;
 public interface PaidSalaryService {
     void addPaidSalary(PaidSalary paidSalary);
 
-    List<PaidSalary> getAllPaidSalariesByEmployeeId(Integer id);
+    List<PaidSalary> getPaidSalariesByEmployeeId(Integer id);
 }

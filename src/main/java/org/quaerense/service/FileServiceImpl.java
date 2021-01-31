@@ -1,7 +1,7 @@
 package org.quaerense.service;
 
 import org.quaerense.dao.FileDao;
-import org.quaerense.domain.File;
+import org.quaerense.domain.UserFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,13 +15,13 @@ public class FileServiceImpl implements FileService {
 
     @Override
     @Transactional
-    public void addFile(File file) {
-        fileDao.addFile(file);
+    public void addFile(UserFile userFile) {
+        fileDao.addFile(userFile);
     }
 
     @Override
     @Transactional
-    public List<File> getFilesByTaskId(Long id) {
+    public List<UserFile> getFilesByTaskId(Long id) {
         return fileDao.getFilesByTaskId(id);
     }
 }

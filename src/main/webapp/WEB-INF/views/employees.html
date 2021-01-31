@@ -6,15 +6,21 @@
         <title>Employees</title>
     </head>
     <body>
-        <table align="center">
-            <tr th:each="employee : ${employees}">
-                <td th:text="${employee.id}">ID</td>
-                <td th:text="${employee.login}">Login</td>
-                <td th:text="${employee.firstName}">First name</td>
-                <td th:text="${employee.lastName}">Last Name</td>
-                <td th:text="${employee.dateOfBirth}">Date of Birth</td>
-                <td th:text="${employee.rating}">Rating</td>
-            </tr>
-        </table>
+        <div th:align="center">
+            <a th:href="@{/add_employee}">Add employee</a>
+            <br />
+
+            <table>
+                <tr th:each="employee : ${employees}">
+                    <td th:text="${employee.id}">ID</td>
+                    <td th:text="${employee.login}">Login</td>
+                    <td th:text="${employee.firstName}">First name</td>
+                    <td th:text="${employee.lastName}">Last Name</td>
+                    <td th:text="${employee.patronymic}">Rating</td>
+                    <td th:text="${employee.dateOfBirth}">Date of Birth</td>
+                    <td th:text="${employee.rating}">Rating</td>
+                </tr>
+            </table>
+        </div>
     </body>
 </html>

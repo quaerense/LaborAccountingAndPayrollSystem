@@ -1,7 +1,10 @@
 package org.quaerense.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -10,19 +13,24 @@ import org.springframework.transaction.TransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
+import java.util.Objects;
 import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
+@PropertySource("classpath:config.properties")
 public class JpaConfig {
+    @Autowired
+    private Environment environment;
+
     @Bean
     public DriverManagerDataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource(
-                "jdbc:mysql://localhost:3306/laps_db?serverTimezone=Europe/Moscow",
-                "root",
-                "root");
+                Objects.requireNonNull(environment.getProperty("jdbc.url")),
+                Objects.requireNonNull(environment.getProperty("jdbc.username")),
+                Objects.requireNonNull(environment.getProperty("jdbc.password")));
 
-        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        dataSource.setDriverClassName(Objects.requireNonNull(environment.getProperty("jdbc.driverClassName")));
 
         return dataSource;
     }

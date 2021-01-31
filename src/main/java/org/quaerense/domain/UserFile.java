@@ -3,8 +3,8 @@ package org.quaerense.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "files")
-public class File {
+@Table(name = "user_files")
+public class UserFile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -20,10 +20,10 @@ public class File {
     @JoinColumn(name = "task_id")
     private Task task;
 
-    public File() {
+    public UserFile() {
     }
 
-    public File(String name, String link, Task task) {
+    public UserFile(String name, String link, Task task) {
         this.name = name;
         this.link = link;
         this.task = task;

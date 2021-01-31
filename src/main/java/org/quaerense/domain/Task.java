@@ -45,12 +45,12 @@ public class Task {
     private Status status;
 
     @OneToMany(mappedBy = "task", fetch = FetchType.EAGER)
-    private Set<File> files;
+    private Set<UserFile> userFiles;
 
     public Task() {
     }
 
-    public Task(String name, String description, Timestamp completeBefore, @DecimalMin(value = "1.0") @DecimalMax(value = "5.0") BigDecimal evaluation, Employee issuedBy, Employee performedBy, Status status, Set<File> files) {
+    public Task(String name, String description, Timestamp completeBefore, @DecimalMin(value = "1.0") @DecimalMax(value = "5.0") BigDecimal evaluation, Employee issuedBy, Employee performedBy, Status status, Set<UserFile> userFiles) {
         this.name = name;
         this.description = description;
         this.completeBefore = completeBefore;
@@ -58,7 +58,7 @@ public class Task {
         this.issuedBy = issuedBy;
         this.performedBy = performedBy;
         this.status = status;
-        this.files = files;
+        this.userFiles = userFiles;
     }
 
     public Long getId() {
@@ -125,11 +125,11 @@ public class Task {
         this.status = status;
     }
 
-    public Set<File> getFiles() {
-        return files;
+    public Set<UserFile> getUserFiles() {
+        return userFiles;
     }
 
-    public void setFiles(Set<File> files) {
-        this.files = files;
+    public void setUserFiles(Set<UserFile> userFiles) {
+        this.userFiles = userFiles;
     }
 }

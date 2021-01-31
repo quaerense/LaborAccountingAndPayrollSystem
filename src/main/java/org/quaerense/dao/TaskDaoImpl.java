@@ -18,8 +18,16 @@ public class TaskDaoImpl implements TaskDao {
     }
 
     @Override
-    public List<Task> getAllTasks() {
+    public List<Task> getTasks() {
         return entityManager.createQuery("SELECT t FROM Task t", Task.class).getResultList();
+    }
+
+    @Override
+    public List<Task> getTasksByEmployeeId(Integer id) {
+        return entityManager
+                .createQuery("SELECT t FROM Task t WHERE t.performedBy.id = :employeeId", Task.class)
+                .setParameter("employeeId", id)
+                .getResultList();
     }
 
     @Override

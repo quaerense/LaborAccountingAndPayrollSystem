@@ -7,7 +7,9 @@ import java.util.List;
 public interface TaskService {
     void addTask(Task task);
 
-    List<Task> getAllTasks();
+    List<Task> getTasks();
+
+    List<Task> getTasksByEmployeeId(Integer id);
 
     Task getTaskById(Long id);
 

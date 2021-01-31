@@ -1,7 +1,5 @@
 package org.quaerense.domain;
 
-import org.hibernate.validator.constraints.Length;
-
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
@@ -16,10 +14,11 @@ public class Employee {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "login", nullable = false, unique = true)
-    @Length(min = 4, max = 16)
+    @Size(min = 4, max = 16, message = "Login should be between 4 and 16 characters")
+    @Column(name = "login", unique = true, nullable = false)
     private String login;
 
+    @Size(min = 8, max = 32, message = "Password should be between 8 and 32 characters")
     @Column(name = "password", nullable = false)
     private String password;
 

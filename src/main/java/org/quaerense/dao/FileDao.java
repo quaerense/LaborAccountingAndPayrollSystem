@@ -1,11 +1,11 @@
 package org.quaerense.dao;
 
-import org.quaerense.domain.File;
+import org.quaerense.domain.UserFile;
 
 import java.util.List;
 
 public interface FileDao {
-    void addFile(File file);
+    void addFile(UserFile userFile);
 
-    List<File> getFilesByTaskId(Long id);
+    List<UserFile> getFilesByTaskId(Long id);
 }

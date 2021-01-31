@@ -21,8 +21,14 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     @Transactional
-    public List<Task> getAllTasks() {
-        return taskDao.getAllTasks();
+    public List<Task> getTasks() {
+        return taskDao.getTasks();
+    }
+
+    @Override
+    @Transactional
+    public List<Task> getTasksByEmployeeId(Integer id) {
+        return taskDao.getTasksByEmployeeId(id);
     }
 
     @Override

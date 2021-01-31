@@ -1,6 +1,6 @@
 package org.quaerense.dao;
 
-import org.quaerense.domain.File;
+import org.quaerense.domain.UserFile;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -13,13 +13,13 @@ public class FileDaoImpl implements FileDao {
     private EntityManager entityManager;
 
     @Override
-    public void addFile(File file) {
-        entityManager.persist(file);
+    public void addFile(UserFile userFile) {
+        entityManager.persist(userFile);
     }
 
     @Override
-    public List<File> getFilesByTaskId(Long id) {
-        return entityManager.createQuery("SELECT f FROM File f WHERE f.task.id = :taskId", File.class)
+    public List<UserFile> getFilesByTaskId(Long id) {
+        return entityManager.createQuery("SELECT f FROM UserFile f WHERE f.task.id = :taskId", UserFile.class)
                 .setParameter("taskId", id)
                 .getResultList();
     }
