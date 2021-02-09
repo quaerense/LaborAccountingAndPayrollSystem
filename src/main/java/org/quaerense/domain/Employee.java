@@ -53,6 +53,9 @@ public class Employee {
     @Column(name = "rating", precision = 2, scale = 1)
     private BigDecimal rating;
 
+    @Column(name = "date_of_employment", nullable = false)
+    private Date dateOfEmployment;
+
     @OneToMany(mappedBy = "issuedBy", fetch = FetchType.EAGER)
     private Set<Task> issuedTask;
 
@@ -71,7 +74,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(String login, String password, String firstName, String lastName, String patronymic, Date dateOfBirth, @Email String email, String phoneNumber, String accountNumber, @Positive BigDecimal salary, @DecimalMin(value = "1.0") @DecimalMax(value = "5.0") BigDecimal rating, Set<Task> issuedTask, Set<Task> performedTask, Set<Role> roles) {
+    public Employee(String login, String password, String firstName, String lastName, String patronymic, Date dateOfBirth, @Email String email, String phoneNumber, String accountNumber, @Positive BigDecimal salary, @DecimalMin(value = "1.0") @DecimalMax(value = "5.0") BigDecimal rating, Date dateOfEmployment, Set<Task> issuedTask, Set<Task> performedTask, Set<Role> roles) {
         this.login = login;
         this.password = password;
         this.firstName = firstName;
@@ -83,6 +86,7 @@ public class Employee {
         this.accountNumber = accountNumber;
         this.salary = salary;
         this.rating = rating;
+        this.dateOfEmployment = dateOfEmployment;
         this.issuedTask = issuedTask;
         this.performedTask = performedTask;
         this.roles = roles;
@@ -182,6 +186,14 @@ public class Employee {
 
     public void setRating(BigDecimal rating) {
         this.rating = rating;
+    }
+
+    public Date getDateOfEmployment() {
+        return dateOfEmployment;
+    }
+
+    public void setDateOfEmployment(Date dateOfEmployment) {
+        this.dateOfEmployment = dateOfEmployment;
     }
 
     public Set<Task> getIssuedTask() {

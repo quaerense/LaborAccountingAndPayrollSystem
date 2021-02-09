@@ -1,5 +1,6 @@
 package org.quaerense.service;
 
+import org.quaerense.dao.DateDao;
 import org.quaerense.dao.EmployeeDao;
 import org.quaerense.dao.RoleDao;
 import org.quaerense.domain.Employee;
@@ -22,12 +23,16 @@ public class EmployeeServiceImpl implements EmployeeService {
     private RoleDao roleDao;
 
     @Autowired
+    private DateDao dateDao;
+
+    @Autowired
     private Environment environment;
 
     @Override
     @Transactional
     public void addEmployee(Employee employee) {
         employee.setLogin(employee.getLogin().toLowerCase());
+        employee.setDateOfEmployment(dateDao.getCurrentDate());
 
         employeeDao.addEmployee(employee);
 
