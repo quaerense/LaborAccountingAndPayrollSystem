@@ -27,7 +27,7 @@ public class MainController {
     }
 
     @GetMapping("/add_employee")
-    public String showAddEmployeeForm(@ModelAttribute("employee") Employee employee) {
+    public String getAddEmployeeForm(@ModelAttribute("employee") Employee employee) {
         return "add_employee";
     }
 

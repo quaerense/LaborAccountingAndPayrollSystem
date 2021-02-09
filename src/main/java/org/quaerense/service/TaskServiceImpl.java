@@ -1,6 +1,7 @@
 package org.quaerense.service;
 
 import org.quaerense.dao.TaskDao;
+import org.quaerense.domain.Status;
 import org.quaerense.domain.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,8 +28,8 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     @Transactional
-    public List<Task> getTasksByEmployeeId(Integer id) {
-        return taskDao.getTasksByEmployeeId(id);
+    public List<Task> getTasksByStatusAndEmployeeId(Status status, Integer id) {
+        return taskDao.getTasksByStatusAndEmployeeId(status, id);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package org.quaerense.dao;
 
+import org.quaerense.domain.Status;
 import org.quaerense.domain.Task;
 
 import java.util.List;
@@ -9,7 +10,7 @@ public interface TaskDao {
 
     List<Task> getTasks();
 
-    List<Task> getTasksByEmployeeId(Integer id);
+    List<Task> getTasksByStatusAndEmployeeId(Status status, Integer id);
 
     Task getTaskById(Long id);
 

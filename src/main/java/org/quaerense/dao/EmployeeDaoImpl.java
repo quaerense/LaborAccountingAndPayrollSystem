@@ -28,6 +28,13 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
+    public Employee getEmployeeByLogin(String login) {
+        return entityManager.createQuery("SELECT e FROM Employee e WHERE e.login = :login", Employee.class)
+                .setParameter("login", login)
+                .getSingleResult();
+    }
+
+    @Override
     public void updateEmployee(Employee employee) {
         entityManager.merge(employee);
     }

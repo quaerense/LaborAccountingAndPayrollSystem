@@ -1,6 +1,7 @@
 package org.quaerense.service;
 
 import org.quaerense.dao.EmployeeDao;
+import org.quaerense.dao.RoleDao;
 import org.quaerense.domain.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
@@ -18,11 +19,16 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeDao employeeDao;
 
     @Autowired
+    private RoleDao roleDao;
+
+    @Autowired
     private Environment environment;
 
     @Override
     @Transactional
     public void addEmployee(Employee employee) {
+        employee.setLogin(employee.getLogin().toLowerCase());
+
         employeeDao.addEmployee(employee);
 
         new File(environment.getProperty("user.files.directory") + "/" + employee.getLogin()).mkdirs();
@@ -38,6 +44,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Transactional
     public Employee getEmployeeById(Integer id) {
         return employeeDao.getEmployeeById(id);
+    }
+
+    @Override
+    @Transactional
+    public Employee getEmployeeByLogin(String login) {
+        return employeeDao.getEmployeeByLogin(login.toLowerCase());
     }
 
     @Override
