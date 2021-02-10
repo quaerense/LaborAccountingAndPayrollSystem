@@ -5,6 +5,7 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Set;
@@ -26,6 +27,10 @@ public class Task {
 
     @Column(name = "complete_before", nullable = false)
     private Timestamp completeBefore;
+
+    @Positive
+    @Column(name = "reward", precision = 10, scale = 2)
+    private BigDecimal reward;
 
     @Column(name = "evaluation", precision = 2, scale = 1)
     @DecimalMin(value = "1.0")
@@ -50,10 +55,11 @@ public class Task {
     public Task() {
     }
 
-    public Task(String name, String description, Timestamp completeBefore, @DecimalMin(value = "1.0") @DecimalMax(value = "5.0") BigDecimal evaluation, Employee issuedBy, Employee performedBy, Status status, Set<UserFile> userFiles) {
+    public Task(String name, String description, Timestamp completeBefore, @Positive BigDecimal reward, @DecimalMin(value = "1.0") @DecimalMax(value = "5.0") BigDecimal evaluation, Employee issuedBy, Employee performedBy, Status status, Set<UserFile> userFiles) {
         this.name = name;
         this.description = description;
         this.completeBefore = completeBefore;
+        this.reward = reward;
         this.evaluation = evaluation;
         this.issuedBy = issuedBy;
         this.performedBy = performedBy;
@@ -91,6 +97,14 @@ public class Task {
 
     public void setCompleteBefore(Timestamp completeBefore) {
         this.completeBefore = completeBefore;
+    }
+
+    public BigDecimal getReward() {
+        return reward;
+    }
+
+    public void setReward(BigDecimal reward) {
+        this.reward = reward;
     }
 
     public BigDecimal getEvaluation() {

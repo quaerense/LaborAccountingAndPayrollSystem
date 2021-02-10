@@ -31,12 +31,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     @Transactional
     public void addEmployee(Employee employee) {
-        employee.setLogin(employee.getLogin().toLowerCase());
+        String pathToUserFilesFolder = environment.getProperty("user.files.directory") + "/" + employee.getUsername();
+
+        employee.setUsername(employee.getUsername().toLowerCase());
         employee.setDateOfEmployment(dateDao.getCurrentDate());
 
         employeeDao.addEmployee(employee);
 
-        new File(environment.getProperty("user.files.directory") + "/" + employee.getLogin()).mkdirs();
+        new File(pathToUserFilesFolder).mkdirs();
     }
 
     @Override
@@ -53,8 +55,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     @Transactional
-    public Employee getEmployeeByLogin(String login) {
-        return employeeDao.getEmployeeByLogin(login.toLowerCase());
+    public Employee getEmployeeByUsername(String username) {
+        return employeeDao.getEmployeeByUsername(username.toLowerCase());
     }
 
     @Override

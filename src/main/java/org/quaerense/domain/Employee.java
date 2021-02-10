@@ -14,9 +14,9 @@ public class Employee {
     @Column(name = "id")
     private Integer id;
 
-    @Size(min = 4, max = 16, message = "Login should be between 4 and 16 characters")
-    @Column(name = "login", unique = true, nullable = false)
-    private String login;
+    @Size(min = 4, max = 16, message = "Username should be between 4 and 16 characters")
+    @Column(name = "username", unique = true, nullable = false)
+    private String username;
 
     @Size(min = 8, max = 32, message = "Password should be between 8 and 32 characters")
     @Column(name = "password", nullable = false)
@@ -41,7 +41,7 @@ public class Employee {
     @Column(name = "phone_number", unique = true, length = 32)
     private String phoneNumber;
 
-    @Column(name = "account_number", nullable = false)
+    @Column(name = "account_number")
     private String accountNumber;
 
     @Positive
@@ -74,8 +74,8 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(String login, String password, String firstName, String lastName, String patronymic, Date dateOfBirth, @Email String email, String phoneNumber, String accountNumber, @Positive BigDecimal salary, @DecimalMin(value = "1.0") @DecimalMax(value = "5.0") BigDecimal rating, Date dateOfEmployment, Set<Task> issuedTask, Set<Task> performedTask, Set<Role> roles) {
-        this.login = login;
+    public Employee(String username, String password, String firstName, String lastName, String patronymic, Date dateOfBirth, @Email String email, String phoneNumber, String accountNumber, @Positive BigDecimal salary, @DecimalMin(value = "1.0") @DecimalMax(value = "5.0") BigDecimal rating, Date dateOfEmployment, Set<Task> issuedTask, Set<Task> performedTask, Set<Role> roles) {
+        this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -100,12 +100,12 @@ public class Employee {
         this.id = id;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

@@ -28,9 +28,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public Employee getEmployeeByLogin(String login) {
-        return entityManager.createQuery("SELECT e FROM Employee e WHERE e.login = :login", Employee.class)
-                .setParameter("login", login)
+    public Employee getEmployeeByUsername(String username) {
+        return entityManager.createQuery("SELECT e FROM Employee e WHERE e.username = :username", Employee.class)
+                .setParameter("username", username)
                 .getSingleResult();
     }
 

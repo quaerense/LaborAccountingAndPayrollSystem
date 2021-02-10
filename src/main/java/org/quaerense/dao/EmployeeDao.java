@@ -11,7 +11,7 @@ public interface EmployeeDao {
 
     Employee getEmployeeById(Integer id);
 
-    Employee getEmployeeByLogin(String login);
+    Employee getEmployeeByUsername(String username);
 
     void updateEmployee(Employee employee);
 

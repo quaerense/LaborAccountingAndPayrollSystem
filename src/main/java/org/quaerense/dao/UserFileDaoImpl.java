@@ -8,17 +8,17 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class FileDaoImpl implements FileDao {
+public class UserFileDaoImpl implements UserFileDao {
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
-    public void addFile(UserFile userFile) {
+    public void addUserFile(UserFile userFile) {
         entityManager.persist(userFile);
     }
 
     @Override
-    public List<UserFile> getFilesByTaskId(Long id) {
+    public List<UserFile> getUserFilesByTaskId(Long id) {
         return entityManager.createQuery("SELECT f FROM UserFile f WHERE f.task.id = :taskId", UserFile.class)
                 .setParameter("taskId", id)
                 .getResultList();
