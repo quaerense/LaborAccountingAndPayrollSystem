@@ -23,11 +23,6 @@
     <label for="dateOfBirth">Date of Birth:</label>
     <input type="date" th:field="*{dateOfBirth}" id="dateOfBirth"/>
     <br/>
-    <label for="roles">Roles:</label>
-    <select th:field="${roles}" multiple id="roles">
-        <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}"></option>
-    </select>
-    <br/>
     <label for="email">Email:</label>
     <input type="text" th:field="*{email}" id="email"/>
     <br/>

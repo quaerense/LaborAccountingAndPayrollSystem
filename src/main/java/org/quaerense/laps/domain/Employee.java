@@ -59,25 +59,34 @@ public class Employee {
     @Column(name = "date_of_employment", nullable = false)
     private Date dateOfEmployment;
 
+    @OneToMany(mappedBy = "employee", fetch = FetchType.EAGER)
+    private Set<EmployeeStatus> employeeStatuses;
+
     @OneToMany(mappedBy = "issuedBy", fetch = FetchType.EAGER)
-    private Set<Task> issuedTask;
+    private Set<Task> issuedTasks;
 
     @OneToMany(mappedBy = "performedBy", fetch = FetchType.EAGER)
-    private Set<Task> performedTask;
+    private Set<Task> performedTasks;
 
     @OneToMany(mappedBy = "employee", fetch = FetchType.EAGER)
     private Set<PaidSalary> paidSalaries;
 
-    @ManyToMany
-    @JoinTable(name = "employee_role",
-            joinColumns = @JoinColumn(name = "employee_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles;
+    @OneToMany(mappedBy = "employee", fetch = FetchType.EAGER)
+    private Set<WorkedDay> workedDays;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "department_id")
+    private Department department;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "profession_id")
+    private Profession profession;
 
     public Employee() {
     }
 
-    public Employee(String username, String password, String confirmPassword, String firstName, String lastName, String patronymic, Date dateOfBirth, @Email String email, String phoneNumber, String accountNumber, @Positive BigDecimal salary, @DecimalMin(value = "1.0") @DecimalMax(value = "5.0") BigDecimal rating, Date dateOfEmployment, Set<Task> issuedTask, Set<Task> performedTask, Set<PaidSalary> paidSalaries, Set<Role> roles) {
+    public Employee(Integer id, @Size(min = 4, max = 16, message = "Username should be between 4 and 16 characters") String username, @Size(min = 8, message = "Password must be over 8 characters") String password, String confirmPassword, String firstName, String lastName, String patronymic, Date dateOfBirth, @Email String email, String phoneNumber, String accountNumber, @Positive BigDecimal salary, @DecimalMin(value = "1.0") @DecimalMax(value = "5.0") BigDecimal rating, Date dateOfEmployment, Set<EmployeeStatus> employeeStatuses, Set<Task> issuedTasks, Set<Task> performedTasks, Set<PaidSalary> paidSalaries, Set<WorkedDay> workedDays, Department department, Profession profession) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.confirmPassword = confirmPassword;
@@ -91,10 +100,13 @@ public class Employee {
         this.salary = salary;
         this.rating = rating;
         this.dateOfEmployment = dateOfEmployment;
-        this.issuedTask = issuedTask;
-        this.performedTask = performedTask;
+        this.employeeStatuses = employeeStatuses;
+        this.issuedTasks = issuedTasks;
+        this.performedTasks = performedTasks;
         this.paidSalaries = paidSalaries;
-        this.roles = roles;
+        this.workedDays = workedDays;
+        this.department = department;
+        this.profession = profession;
     }
 
     public Integer getId() {
@@ -209,20 +221,28 @@ public class Employee {
         this.dateOfEmployment = dateOfEmployment;
     }
 
-    public Set<Task> getIssuedTask() {
-        return issuedTask;
+    public Set<EmployeeStatus> getEmployeeStatuses() {
+        return employeeStatuses;
     }
 
-    public void setIssuedTask(Set<Task> issuedTask) {
-        this.issuedTask = issuedTask;
+    public void setEmployeeStatuses(Set<EmployeeStatus> employeeStatuses) {
+        this.employeeStatuses = employeeStatuses;
     }
 
-    public Set<Task> getPerformedTask() {
-        return performedTask;
+    public Set<Task> getIssuedTasks() {
+        return issuedTasks;
     }
 
-    public void setPerformedTask(Set<Task> performedTask) {
-        this.performedTask = performedTask;
+    public void setIssuedTasks(Set<Task> issuedTasks) {
+        this.issuedTasks = issuedTasks;
+    }
+
+    public Set<Task> getPerformedTasks() {
+        return performedTasks;
+    }
+
+    public void setPerformedTasks(Set<Task> performedTasks) {
+        this.performedTasks = performedTasks;
     }
 
     public Set<PaidSalary> getPaidSalaries() {
@@ -233,11 +253,27 @@ public class Employee {
         this.paidSalaries = paidSalaries;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public Set<WorkedDay> getWorkedDays() {
+        return workedDays;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setWorkedDays(Set<WorkedDay> workedDays) {
+        this.workedDays = workedDays;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public Profession getProfession() {
+        return profession;
+    }
+
+    public void setProfession(Profession profession) {
+        this.profession = profession;
     }
 }

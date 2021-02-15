@@ -26,7 +26,7 @@ public class EmployeeUserDetailsService implements UserDetailsService {
 
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 
-        for (Role role : employee.getRoles()) {
+        for (Role role : employee.getProfession().getRoles()) {
             grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
         }
 

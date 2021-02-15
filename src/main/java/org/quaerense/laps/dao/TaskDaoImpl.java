@@ -1,6 +1,6 @@
 package org.quaerense.laps.dao;
 
-import org.quaerense.laps.domain.Status;
+import org.quaerense.laps.domain.TaskStatus;
 import org.quaerense.laps.domain.Task;
 import org.springframework.stereotype.Repository;
 
@@ -24,10 +24,10 @@ public class TaskDaoImpl implements TaskDao {
     }
 
     @Override
-    public List<Task> getTasksByStatusAndEmployeeId(Status status, Integer id) {
+    public List<Task> getTasksByStatusAndEmployeeId(TaskStatus taskStatus, Integer id) {
         return entityManager
                 .createQuery("SELECT t FROM Task t WHERE t.status = :status AND t.performedBy.id = :employeeId", Task.class)
-                .setParameter("status", status)
+                .setParameter("status", taskStatus)
                 .setParameter("employeeId", id)
                 .getResultList();
     }

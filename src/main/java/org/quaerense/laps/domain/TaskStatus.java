@@ -5,8 +5,8 @@ import java.util.Set;
 
 
 @Entity
-@Table(name = "statuses")
-public class Status {
+@Table(name = "task_statuses")
+public class TaskStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -15,13 +15,13 @@ public class Status {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "status", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "taskStatus", fetch = FetchType.EAGER)
     private Set<Task> tasks;
 
-    public Status() {
+    public TaskStatus() {
     }
 
-    public Status(String name, Set<Task> tasks) {
+    public TaskStatus(String name, Set<Task> tasks) {
         this.name = name;
         this.tasks = tasks;
     }

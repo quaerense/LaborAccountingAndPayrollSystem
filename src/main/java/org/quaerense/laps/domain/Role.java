@@ -15,17 +15,18 @@ public class Role {
     private String name;
 
     @ManyToMany
-    @JoinTable(name = "employee_role",
+    @JoinTable(name = "profession_role",
             joinColumns = @JoinColumn(name = "role_id"),
-            inverseJoinColumns = @JoinColumn(name = "employee_id"))
-    private Set<Employee> employees;
+            inverseJoinColumns = @JoinColumn(name = "profession_id"))
+    private Set<Profession> professions;
 
     public Role() {
     }
 
-    public Role(String name, Set<Employee> employees) {
+    public Role(Integer id, String name, Set<Profession> professions) {
+        this.id = id;
         this.name = name;
-        this.employees = employees;
+        this.professions = professions;
     }
 
     public Integer getId() {
@@ -44,11 +45,11 @@ public class Role {
         this.name = name;
     }
 
-    public Set<Employee> getEmployees() {
-        return employees;
+    public Set<Profession> getProfessions() {
+        return professions;
     }
 
-    public void setEmployees(Set<Employee> employees) {
-        this.employees = employees;
+    public void setProfessions(Set<Profession> professions) {
+        this.professions = professions;
     }
 }

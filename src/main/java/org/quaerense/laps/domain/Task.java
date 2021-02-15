@@ -47,7 +47,7 @@ public class Task {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "status_id")
-    private Status status;
+    private TaskStatus taskStatus;
 
     @OneToMany(mappedBy = "task", fetch = FetchType.EAGER)
     private Set<UserFile> userFiles;
@@ -55,7 +55,7 @@ public class Task {
     public Task() {
     }
 
-    public Task(String name, String description, Timestamp completeBefore, @Positive BigDecimal reward, @DecimalMin(value = "1.0") @DecimalMax(value = "5.0") BigDecimal evaluation, Employee issuedBy, Employee performedBy, Status status, Set<UserFile> userFiles) {
+    public Task(String name, String description, Timestamp completeBefore, @Positive BigDecimal reward, @DecimalMin(value = "1.0") @DecimalMax(value = "5.0") BigDecimal evaluation, Employee issuedBy, Employee performedBy, TaskStatus taskStatus, Set<UserFile> userFiles) {
         this.name = name;
         this.description = description;
         this.completeBefore = completeBefore;
@@ -63,7 +63,7 @@ public class Task {
         this.evaluation = evaluation;
         this.issuedBy = issuedBy;
         this.performedBy = performedBy;
-        this.status = status;
+        this.taskStatus = taskStatus;
         this.userFiles = userFiles;
     }
 
@@ -131,12 +131,12 @@ public class Task {
         this.performedBy = performedBy;
     }
 
-    public Status getStatus() {
-        return status;
+    public TaskStatus getTaskStatus() {
+        return taskStatus;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setTaskStatus(TaskStatus taskStatus) {
+        this.taskStatus = taskStatus;
     }
 
     public Set<UserFile> getUserFiles() {
