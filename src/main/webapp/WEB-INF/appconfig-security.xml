@@ -34,7 +34,7 @@
     </authentication-manager>
 
     <beans:bean id="employeeUserDetailsService"
-                class="org.quaerense.service.EmployeeUserDetailsService"/>
+                class="org.quaerense.laps.service.EmployeeUserDetailsService"/>
 
     <beans:bean id="encoder"
                 class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
