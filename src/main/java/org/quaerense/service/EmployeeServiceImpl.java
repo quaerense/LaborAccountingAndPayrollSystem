@@ -7,6 +7,7 @@ import org.quaerense.domain.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,10 +21,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeDao employeeDao;
 
     @Autowired
-    private RoleDao roleDao;
+    private DateDao dateDao;
 
     @Autowired
-    private DateDao dateDao;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     private Environment environment;
@@ -34,6 +35,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         String pathToUserFilesFolder = environment.getProperty("user.files.directory") + "/" + employee.getUsername();
 
         employee.setUsername(employee.getUsername().toLowerCase());
+        employee.setPassword(bCryptPasswordEncoder.encode(employee.getPassword()));
         employee.setDateOfEmployment(dateDao.getCurrentDate());
 
         employeeDao.addEmployee(employee);

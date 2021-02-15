@@ -18,9 +18,12 @@ public class Employee {
     @Column(name = "username", unique = true, nullable = false)
     private String username;
 
-    @Size(min = 8, max = 32, message = "Password should be between 8 and 32 characters")
+    @Size(min = 8, message = "Password must be over 8 characters")
     @Column(name = "password", nullable = false)
     private String password;
+
+    @Transient
+    private String confirmPassword;
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -74,9 +77,10 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(String username, String password, String firstName, String lastName, String patronymic, Date dateOfBirth, @Email String email, String phoneNumber, String accountNumber, @Positive BigDecimal salary, @DecimalMin(value = "1.0") @DecimalMax(value = "5.0") BigDecimal rating, Date dateOfEmployment, Set<Task> issuedTask, Set<Task> performedTask, Set<Role> roles) {
+    public Employee(String username, String password, String confirmPassword, String firstName, String lastName, String patronymic, Date dateOfBirth, @Email String email, String phoneNumber, String accountNumber, @Positive BigDecimal salary, @DecimalMin(value = "1.0") @DecimalMax(value = "5.0") BigDecimal rating, Date dateOfEmployment, Set<Task> issuedTask, Set<Task> performedTask, Set<PaidSalary> paidSalaries, Set<Role> roles) {
         this.username = username;
         this.password = password;
+        this.confirmPassword = confirmPassword;
         this.firstName = firstName;
         this.lastName = lastName;
         this.patronymic = patronymic;
@@ -89,6 +93,7 @@ public class Employee {
         this.dateOfEmployment = dateOfEmployment;
         this.issuedTask = issuedTask;
         this.performedTask = performedTask;
+        this.paidSalaries = paidSalaries;
         this.roles = roles;
     }
 
@@ -114,6 +119,14 @@ public class Employee {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     public String getFirstName() {
@@ -210,6 +223,14 @@ public class Employee {
 
     public void setPerformedTask(Set<Task> performedTask) {
         this.performedTask = performedTask;
+    }
+
+    public Set<PaidSalary> getPaidSalaries() {
+        return paidSalaries;
+    }
+
+    public void setPaidSalaries(Set<PaidSalary> paidSalaries) {
+        this.paidSalaries = paidSalaries;
     }
 
     public Set<Role> getRoles() {
