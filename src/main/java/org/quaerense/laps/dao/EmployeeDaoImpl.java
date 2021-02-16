@@ -23,7 +23,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public Employee getEmployeeById(Integer id) {
+    public Employee getEmployeeById(Long id) {
         return entityManager.find(Employee.class, id);
     }
 

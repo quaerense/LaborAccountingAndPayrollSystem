@@ -24,7 +24,7 @@ public class TaskDaoImpl implements TaskDao {
     }
 
     @Override
-    public List<Task> getTasksByStatusAndEmployeeId(TaskStatus taskStatus, Integer id) {
+    public List<Task> getTasksByStatusAndEmployeeId(TaskStatus taskStatus, Long id) {
         return entityManager
                 .createQuery("SELECT t FROM Task t WHERE t.status = :status AND t.performedBy.id = :employeeId", Task.class)
                 .setParameter("status", taskStatus)

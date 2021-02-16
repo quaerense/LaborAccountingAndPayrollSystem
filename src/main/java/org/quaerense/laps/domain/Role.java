@@ -9,31 +9,31 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
-    @Column(name = "name", length = 16, unique = true, nullable = false)
+    @Column(name = "name", unique = true, length = 32)
     private String name;
 
     @ManyToMany
     @JoinTable(name = "profession_role",
             joinColumns = @JoinColumn(name = "role_id"),
             inverseJoinColumns = @JoinColumn(name = "profession_id"))
-    private Set<Profession> professions;
+    private Set<Profession> profession;
 
     public Role() {
     }
 
-    public Role(Integer id, String name, Set<Profession> professions) {
+    public Role(Long id, String name, Set<Profession> profession) {
         this.id = id;
         this.name = name;
-        this.professions = professions;
+        this.profession = profession;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -45,11 +45,11 @@ public class Role {
         this.name = name;
     }
 
-    public Set<Profession> getProfessions() {
-        return professions;
+    public Set<Profession> getProfession() {
+        return profession;
     }
 
-    public void setProfessions(Set<Profession> professions) {
-        this.professions = professions;
+    public void setProfession(Set<Profession> profession) {
+        this.profession = profession;
     }
 }

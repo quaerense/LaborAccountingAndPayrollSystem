@@ -9,7 +9,7 @@ public class Profession {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -17,24 +17,24 @@ public class Profession {
     @OneToMany(mappedBy = "profession", fetch = FetchType.EAGER)
     private Set<Employee> employees;
 
-    @ManyToMany(mappedBy = "professions")
+    @ManyToMany(mappedBy = "profession")
     private Set<Role> roles;
 
     public Profession() {
     }
 
-    public Profession(Integer id, String name, Set<Employee> employees, Set<Role> roles) {
+    public Profession(Long id, String name, Set<Employee> employees, Set<Role> roles) {
         this.id = id;
         this.name = name;
         this.employees = employees;
         this.roles = roles;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

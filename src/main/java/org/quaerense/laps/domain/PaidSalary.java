@@ -9,7 +9,7 @@ public class PaidSalary {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
     @Column(name = "accrued_on")
     private Timestamp accruedOn;
@@ -26,11 +26,11 @@ public class PaidSalary {
         this.employee = employee;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

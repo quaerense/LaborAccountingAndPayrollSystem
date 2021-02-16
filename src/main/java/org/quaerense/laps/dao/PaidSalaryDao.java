@@ -7,5 +7,5 @@ import java.util.List;
 public interface PaidSalaryDao {
     void addPaidSalary(PaidSalary paidSalary);
 
-    List<PaidSalary> getAllPaidSalariesByEmployeeId(Integer id);
+    List<PaidSalary> getAllPaidSalariesByEmployeeId(Long id);
 }

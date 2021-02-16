@@ -27,7 +27,7 @@ public class PaidSalaryServiceImpl implements PaidSalaryService {
 
     @Override
     @Transactional
-    public List<PaidSalary> getPaidSalariesByEmployeeId(Integer id) {
+    public List<PaidSalary> getPaidSalariesByEmployeeId(Long id) {
         return paidSalaryDao.getAllPaidSalariesByEmployeeId(id);
     }
 }

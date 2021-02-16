@@ -12,7 +12,7 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
     @Size(min = 4, max = 16, message = "Username should be between 4 and 16 characters")
     @Column(name = "username", unique = true, nullable = false)
@@ -85,7 +85,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(Integer id, @Size(min = 4, max = 16, message = "Username should be between 4 and 16 characters") String username, @Size(min = 8, message = "Password must be over 8 characters") String password, String confirmPassword, String firstName, String lastName, String patronymic, Date dateOfBirth, @Email String email, String phoneNumber, String accountNumber, @Positive BigDecimal salary, @DecimalMin(value = "1.0") @DecimalMax(value = "5.0") BigDecimal rating, Date dateOfEmployment, Set<EmployeeStatus> employeeStatuses, Set<Task> issuedTasks, Set<Task> performedTasks, Set<PaidSalary> paidSalaries, Set<WorkedDay> workedDays, Department department, Profession profession) {
+    public Employee(Long id, @Size(min = 4, max = 16, message = "Username should be between 4 and 16 characters") String username, @Size(min = 8, message = "Password must be over 8 characters") String password, String confirmPassword, String firstName, String lastName, String patronymic, Date dateOfBirth, @Email String email, String phoneNumber, String accountNumber, @Positive BigDecimal salary, @DecimalMin(value = "1.0") @DecimalMax(value = "5.0") BigDecimal rating, Date dateOfEmployment, Set<EmployeeStatus> employeeStatuses, Set<Task> issuedTasks, Set<Task> performedTasks, Set<PaidSalary> paidSalaries, Set<WorkedDay> workedDays, Department department, Profession profession) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -109,11 +109,11 @@ public class Employee {
         this.profession = profession;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

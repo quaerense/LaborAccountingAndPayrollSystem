@@ -9,7 +9,7 @@ public class WorkedDay {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
     @Column(name = "login_time")
     private Timestamp loginTime;
@@ -24,18 +24,18 @@ public class WorkedDay {
     public WorkedDay() {
     }
 
-    public WorkedDay(Integer id, Timestamp loginTime, Timestamp logoutTime, Employee employee) {
+    public WorkedDay(Long id, Timestamp loginTime, Timestamp logoutTime, Employee employee) {
         this.id = id;
         this.loginTime = loginTime;
         this.logoutTime = logoutTime;
         this.employee = employee;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

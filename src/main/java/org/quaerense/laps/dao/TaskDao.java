@@ -10,7 +10,7 @@ public interface TaskDao {
 
     List<Task> getTasks();
 
-    List<Task> getTasksByStatusAndEmployeeId(TaskStatus taskStatus, Integer id);
+    List<Task> getTasksByStatusAndEmployeeId(TaskStatus taskStatus, Long id);
 
     Task getTaskById(Long id);
 

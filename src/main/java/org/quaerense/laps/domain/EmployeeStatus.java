@@ -8,7 +8,7 @@ public class EmployeeStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -20,17 +20,17 @@ public class EmployeeStatus {
     public EmployeeStatus() {
     }
 
-    public EmployeeStatus(Integer id, String name, Employee employee) {
+    public EmployeeStatus(Long id, String name, Employee employee) {
         this.id = id;
         this.name = name;
         this.employee = employee;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

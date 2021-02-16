@@ -50,7 +50,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     @Transactional
-    public Employee getEmployeeById(Integer id) {
+    public Employee getEmployeeById(Long id) {
         return employeeDao.getEmployeeById(id);
     }
 

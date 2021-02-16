@@ -9,7 +9,7 @@ public interface EmployeeService {
 
     List<Employee> getEmployees();
 
-    Employee getEmployeeById(Integer id);
+    Employee getEmployeeById(Long id);
 
     Employee getEmployeeByUsername(String username);
 
