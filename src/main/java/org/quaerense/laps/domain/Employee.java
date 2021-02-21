@@ -1,10 +1,10 @@
 package org.quaerense.laps.domain;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-import java.math.BigDecimal;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 import java.sql.Date;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "employees")
@@ -14,11 +14,11 @@ public class Employee {
     @Column(name = "id")
     private Long id;
 
-    @Size(min = 4, max = 16, message = "Username should be between 4 and 16 characters")
+    @Size(min = 4, max = 16, message = "Имя пользователя должно содержать от 4 до 16 символов")
     @Column(name = "username", unique = true, nullable = false)
     private String username;
 
-    @Size(min = 8, message = "Password must be over 8 characters")
+    @Size(min = 8, message = "Пароль должен состоять минимум из 8 символов")
     @Column(name = "password", nullable = false)
     private String password;
 
@@ -37,6 +37,9 @@ public class Employee {
     @Column(name = "date_of_birth")
     private Date dateOfBirth;
 
+    @Column(name = "personnel_number")
+    private String personnelNumber;
+
     @Email
     @Column(name = "email", unique = true, length = 128)
     private String email;
@@ -47,45 +50,29 @@ public class Employee {
     @Column(name = "account_number")
     private String accountNumber;
 
-    @Positive
-    @Column(name = "salary", nullable = false, precision = 10, scale = 2)
-    private BigDecimal salary;
-
-    @DecimalMin(value = "1.0")
-    @DecimalMax(value = "5.0")
-    @Column(name = "rating", precision = 2, scale = 1)
-    private BigDecimal rating;
-
     @Column(name = "date_of_employment", nullable = false)
     private Date dateOfEmployment;
-
-    @OneToMany(mappedBy = "employee", fetch = FetchType.EAGER)
-    private Set<EmployeeStatus> employeeStatuses;
-
-    @OneToMany(mappedBy = "issuedBy", fetch = FetchType.EAGER)
-    private Set<Task> issuedTasks;
-
-    @OneToMany(mappedBy = "performedBy", fetch = FetchType.EAGER)
-    private Set<Task> performedTasks;
-
-    @OneToMany(mappedBy = "employee", fetch = FetchType.EAGER)
-    private Set<PaidSalary> paidSalaries;
-
-    @OneToMany(mappedBy = "employee", fetch = FetchType.EAGER)
-    private Set<WorkedDay> workedDays;
-
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "department_id")
-    private Department department;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "profession_id")
     private Profession profession;
 
+    @OneToMany(mappedBy = "employee")
+    private List<EmployeeStatus> employeeStatuses;
+
+    @OneToMany(mappedBy = "employee")
+    private List<PaidSalary> paidSalaries;
+
+    @ManyToMany
+    @JoinTable(name = "employee_day",
+            joinColumns = @JoinColumn(name = "employee_id"),
+            inverseJoinColumns = @JoinColumn(name = "day_id"))
+    private List<Day> days;
+
     public Employee() {
     }
 
-    public Employee(Long id, @Size(min = 4, max = 16, message = "Username should be between 4 and 16 characters") String username, @Size(min = 8, message = "Password must be over 8 characters") String password, String confirmPassword, String firstName, String lastName, String patronymic, Date dateOfBirth, @Email String email, String phoneNumber, String accountNumber, @Positive BigDecimal salary, @DecimalMin(value = "1.0") @DecimalMax(value = "5.0") BigDecimal rating, Date dateOfEmployment, Set<EmployeeStatus> employeeStatuses, Set<Task> issuedTasks, Set<Task> performedTasks, Set<PaidSalary> paidSalaries, Set<WorkedDay> workedDays, Department department, Profession profession) {
+    public Employee(Long id, @Size(min = 4, max = 16, message = "Имя пользователя должно содержать от 4 до 16 символов") String username, @Size(min = 8, message = "Пароль должен состоять минимум из 8 символов") String password, String confirmPassword, String firstName, String lastName, String patronymic, Date dateOfBirth, String personnelNumber, @Email String email, String phoneNumber, String accountNumber, Date dateOfEmployment, Profession profession, List<EmployeeStatus> employeeStatuses, List<PaidSalary> paidSalaries, List<Day> days) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -94,19 +81,15 @@ public class Employee {
         this.lastName = lastName;
         this.patronymic = patronymic;
         this.dateOfBirth = dateOfBirth;
+        this.personnelNumber = personnelNumber;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.accountNumber = accountNumber;
-        this.salary = salary;
-        this.rating = rating;
         this.dateOfEmployment = dateOfEmployment;
-        this.employeeStatuses = employeeStatuses;
-        this.issuedTasks = issuedTasks;
-        this.performedTasks = performedTasks;
-        this.paidSalaries = paidSalaries;
-        this.workedDays = workedDays;
-        this.department = department;
         this.profession = profession;
+        this.employeeStatuses = employeeStatuses;
+        this.paidSalaries = paidSalaries;
+        this.days = days;
     }
 
     public Long getId() {
@@ -173,6 +156,14 @@ public class Employee {
         this.dateOfBirth = dateOfBirth;
     }
 
+    public String getPersonnelNumber() {
+        return personnelNumber;
+    }
+
+    public void setPersonnelNumber(String personnelNumber) {
+        this.personnelNumber = personnelNumber;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -197,22 +188,6 @@ public class Employee {
         this.accountNumber = accountNumber;
     }
 
-    public BigDecimal getSalary() {
-        return salary;
-    }
-
-    public void setSalary(BigDecimal salary) {
-        this.salary = salary;
-    }
-
-    public BigDecimal getRating() {
-        return rating;
-    }
-
-    public void setRating(BigDecimal rating) {
-        this.rating = rating;
-    }
-
     public Date getDateOfEmployment() {
         return dateOfEmployment;
     }
@@ -221,59 +196,35 @@ public class Employee {
         this.dateOfEmployment = dateOfEmployment;
     }
 
-    public Set<EmployeeStatus> getEmployeeStatuses() {
-        return employeeStatuses;
-    }
-
-    public void setEmployeeStatuses(Set<EmployeeStatus> employeeStatuses) {
-        this.employeeStatuses = employeeStatuses;
-    }
-
-    public Set<Task> getIssuedTasks() {
-        return issuedTasks;
-    }
-
-    public void setIssuedTasks(Set<Task> issuedTasks) {
-        this.issuedTasks = issuedTasks;
-    }
-
-    public Set<Task> getPerformedTasks() {
-        return performedTasks;
-    }
-
-    public void setPerformedTasks(Set<Task> performedTasks) {
-        this.performedTasks = performedTasks;
-    }
-
-    public Set<PaidSalary> getPaidSalaries() {
-        return paidSalaries;
-    }
-
-    public void setPaidSalaries(Set<PaidSalary> paidSalaries) {
-        this.paidSalaries = paidSalaries;
-    }
-
-    public Set<WorkedDay> getWorkedDays() {
-        return workedDays;
-    }
-
-    public void setWorkedDays(Set<WorkedDay> workedDays) {
-        this.workedDays = workedDays;
-    }
-
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
-
     public Profession getProfession() {
         return profession;
     }
 
     public void setProfession(Profession profession) {
         this.profession = profession;
+    }
+
+    public List<EmployeeStatus> getEmployeeStatuses() {
+        return employeeStatuses;
+    }
+
+    public void setEmployeeStatuses(List<EmployeeStatus> employeeStatuses) {
+        this.employeeStatuses = employeeStatuses;
+    }
+
+    public List<PaidSalary> getPaidSalaries() {
+        return paidSalaries;
+    }
+
+    public void setPaidSalaries(List<PaidSalary> paidSalaries) {
+        this.paidSalaries = paidSalaries;
+    }
+
+    public List<Day> getDays() {
+        return days;
+    }
+
+    public void setDays(List<Day> days) {
+        this.days = days;
     }
 }

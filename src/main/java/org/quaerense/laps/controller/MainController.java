@@ -9,11 +9,11 @@ public class MainController {
     @GetMapping(value = {"", "/login"})
     public String showLoginPage(Model model, String error, String logout) {
         if (error != null) {
-            model.addAttribute("error", "Username or password is incorrect");
+            model.addAttribute("error", "Неправильный логин или пароль");
         }
 
         if (logout != null) {
-            model.addAttribute("message", "Logged out successfully");
+            model.addAttribute("message", "Вы вышли из системы");
         }
 
         return "login";

@@ -1,25 +1,23 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/" lang="en">
+<html xmlns:th="http://www.thymeleaf.org/" lang="en">
 
     <head>
         <meta charset="UTF-8">
-        <title>Employees</title>
+        <title>Работники</title>
     </head>
     <body>
         <div th:align="center">
-            <a th:href="@{/employees/add}">Add employee</a>
-            <br />
+            <a th:href="@{/employees/add}">Добавить работника</a><br />
 
             <table>
                 <tr th:each="employee : ${employees}">
                     <td th:text="${employee.id}">ID</td>
-                    <td th:text="${employee.username}">Username</td>
-                    <td th:text="${employee.firstName}">First name</td>
-                    <td th:text="${employee.lastName}">Last Name</td>
-                    <td th:text="${employee.patronymic}">Rating</td>
-                    <td th:text="${employee.dateOfBirth}">Date of Birth</td>
-                    <td th:text="${employee.rating}">Rating</td>
-                    <td th:text="${employee.dateOfEmployment}">Date of Employment</td>
+                    <td th:text="${employee.personnelNumber}">Табельный номер:</td>
+                    <td th:text="${employee.firstName}">Имя:</td>
+                    <td th:text="${employee.lastName}">Фамилия:</td>
+                    <td th:text="${employee.patronymic}">Отчество:</td>
+                    <td th:text="${employee.dateOfBirth}">Дата рождения:</td>
+                    <td th:text="${employee.dateOfEmployment}">Принят на работу:</td>
                 </tr>
             </table>
         </div>

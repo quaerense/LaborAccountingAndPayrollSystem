@@ -4,26 +4,27 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "roles")
-public class Role {
+@Table(name = "structural_subdivisions")
+public class StructuralSubdivision {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name", unique = true, length = 32)
+    @Column(name = "code")
+    private String code;
+
+    @Column(name = "name")
     private String name;
 
-    @ManyToMany
-    @JoinTable(name = "profession_role",
-            joinColumns = @JoinColumn(name = "role_id"),
-            inverseJoinColumns = @JoinColumn(name = "profession_id"))
+    @OneToMany(mappedBy = "structuralSubdivision")
     private List<Profession> professions;
 
-    public Role() {
+    public StructuralSubdivision() {
     }
 
-    public Role(String name, List<Profession> professions) {
+    public StructuralSubdivision(String code, String name, List<Profession> professions) {
+        this.code = code;
         this.name = name;
         this.professions = professions;
     }
@@ -34,6 +35,14 @@ public class Role {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getName() {
@@ -48,7 +57,7 @@ public class Role {
         return professions;
     }
 
-    public void setProfession(List<Profession> professions) {
+    public void setProfessions(List<Profession> professions) {
         this.professions = professions;
     }
 }

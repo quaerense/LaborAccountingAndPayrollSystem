@@ -1,6 +1,7 @@
 package org.quaerense.laps.domain;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "employee_statuses")
@@ -13,17 +14,20 @@ public class EmployeeStatus {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "employee_id")
     private Employee employee;
+
+    @OneToMany(mappedBy = "employeeStatus")
+    private List<Day> days;
 
     public EmployeeStatus() {
     }
 
-    public EmployeeStatus(Long id, String name, Employee employee) {
-        this.id = id;
+    public EmployeeStatus(String name, Employee employee, List<Day> days) {
         this.name = name;
         this.employee = employee;
+        this.days = days;
     }
 
     public Long getId() {
@@ -48,5 +52,13 @@ public class EmployeeStatus {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
+    }
+
+    public List<Day> getDays() {
+        return days;
+    }
+
+    public void setDays(List<Day> days) {
+        this.days = days;
     }
 }

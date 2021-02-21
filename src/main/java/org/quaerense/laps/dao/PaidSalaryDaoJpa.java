@@ -8,7 +8,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class PaidSalaryDaoImpl implements PaidSalaryDao {
+public class PaidSalaryDaoJpa implements PaidSalaryDao {
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -18,10 +18,10 @@ public class PaidSalaryDaoImpl implements PaidSalaryDao {
     }
 
     @Override
-    public List<PaidSalary> getAllPaidSalariesByEmployeeId(Long id) {
+    public List<PaidSalary> getPaidSalariesByEmployeeId(Long id) {
         return entityManager
-                .createQuery("SELECT ps FROM PaidSalary ps WHERE ps.employee.id = :employeeId", PaidSalary.class)
-                .setParameter("employeeId", id)
+                .createQuery("SELECT ps FROM PaidSalary ps WHERE ps.employee.id = :id", PaidSalary.class)
+                .setParameter("id", id)
                 .getResultList();
     }
 }

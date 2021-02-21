@@ -12,14 +12,8 @@
           class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
         <property name="prefix" value="/WEB-INF/views/"/>
         <property name="suffix" value=".html"/>
-        <property name="templateMode" value="HTML5"/>
-    </bean>
-
-    <bean id="viewResolver"
-          class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
-        <property name="order" value="1"/>
         <property name="characterEncoding" value="UTF-8"/>
-        <property name="templateEngine" ref="templateEngine"/>
+        <property name="templateMode" value="HTML5"/>
     </bean>
 
     <bean id="templateEngine"
@@ -27,7 +21,10 @@
         <property name="templateResolver" ref="templateResolver"/>
     </bean>
 
-    <bean class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
+    <bean id="viewResolver"
+          class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
+        <property name="order" value="1"/>
+        <property name="characterEncoding" value="UTF-8"/>
         <property name="templateEngine" ref="templateEngine"/>
     </bean>
 

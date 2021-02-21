@@ -1,45 +1,42 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org/" lang="en">
+<html xmlns:th="http://www.thymeleaf.org/" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>New Employee</title>
+    <title>Новый работник</title>
 </head>
 <body>
-<h1>New Employee</h1>
+<h1>Новый работник</h1>
 
 <form th:action="@{/employees/add}" th:method="post" th:object="${employee}">
-    <label for="username">Username:</label>
-    <input type="text" th:field="*{username}" id="username"/>
+    <label th:for="username">Имя пользователя:</label><br/>
+    <input th:type="text" th:field="*{username}" id="username"/>
     <br/>
-    <label for="password">Password:</label>
-    <input type="password" th:field="*{password}" id="password"/>
+    <label th:for="password">Пароль:</label><br/>
+    <input th:type="password" th:field="*{password}" id="password"/>
     <br/>
-    <label for="firstName">First name:</label>
-    <input type="text" th:field="*{firstName}" id="firstName"/>
+    <label th:for="confirmPassword">Подтвердить пароль:</label><br/>
+    <input th:type="password" th:field="*{confirmPassword}" id="confirmPassword"/>
     <br/>
-    <label for="lastName">Last name:</label>
-    <input type="text" th:field="*{lastName}" id="lastName"/>
+    <label th:for="firstName">Имя:</label><br/>
+    <input th:type="text" th:field="*{firstName}" id="firstName"/>
     <br/>
-    <label for="dateOfBirth">Date of Birth:</label>
-    <input type="date" th:field="*{dateOfBirth}" id="dateOfBirth"/>
+    <label th:for="lastName">Фамилия:</label><br/>
+    <input th:type="text" th:field="*{lastName}" id="lastName"/>
     <br/>
-    <label for="email">Email:</label>
-    <input type="text" th:field="*{email}" id="email"/>
+    <label th:for="dateOfBirth">Дата рождения:</label><br/>
+    <input th:type="date" th:field="*{dateOfBirth}" id="dateOfBirth"/>
     <br/>
-    <label for="phoneNumber">Phone number:</label>
-    <input type="text" th:field="*{phoneNumber}" id="phoneNumber"/>
+    <label th:for="email">Email:</label><br/>
+    <input th:type="text" th:field="*{email}" id="email"/>
     <br/>
-    <label for="accountNumber">Account Number:</label>
-    <input type="text" th:field="*{accountNumber}" id="accountNumber"/>
+    <label th:for="phoneNumber">Номер телефона:</label><br/>
+    <input th:type="text" th:field="*{phoneNumber}" id="phoneNumber"/>
     <br/>
-    <label for="salary">Salary:</label>
-    <input type="number" th:field="*{salary}" id="salary"/>
-    <br/>
-    <label for="rating">Rating:</label>
-    <input type="number" th:min="1" th:max="5" th:field="*{rating}" id="rating"/>
+    <label th:for="accountNumber">Номер счета:</label><br/>
+    <input th:type="text" th:field="*{accountNumber}" id="accountNumber"/>
     <br/>
     <label>
-        <input type="submit" value="Save"/>
+        <input th:type="submit" th:value="Сохранить"/>
     </label>
 </form>
 </body>

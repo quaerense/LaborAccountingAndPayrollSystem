@@ -21,4 +21,11 @@ public class DateDaoMysql implements DateDao {
     public Timestamp getCurrentTimestamp() {
         return (Timestamp) entityManager.createNativeQuery("SELECT CURRENT_TIMESTAMP()").getSingleResult();
     }
+
+    @Override
+    public Integer getDayOfWeekByDate(Date date) {
+        return (Integer) entityManager.createNativeQuery("SELECT DAYOFWEEK(:date)")
+                .setParameter("date", date)
+                .getSingleResult();
+    }
 }

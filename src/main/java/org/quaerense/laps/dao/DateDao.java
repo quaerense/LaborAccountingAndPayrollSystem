@@ -7,4 +7,6 @@ public interface DateDao {
     Date getCurrentDate();
 
     Timestamp getCurrentTimestamp();
+
+    Integer getDayOfWeekByDate(Date date);
 }

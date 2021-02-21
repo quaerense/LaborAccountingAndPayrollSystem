@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
     <head>
-        <title>Login page</title>
+        <title>Войти</title>
     </head>
 <body>
-    <h1>Login page</h1>
+    <h1>Система учета труда и начисления заработной платы</h1>
         <form th:action="@{/login}" method="post">
-            <label for="username">Username</label>:
+            <label for="username">Имя пользователя:</label><br/>
             <input type="text" id="username" name="username" autofocus="autofocus"/><br/>
-            <label for="password">Password</label>:
+            <label for="password">Пароль:</label><br/>
             <input type="password" id="password" name="password"/><br/>
-            <input type="submit" value="Log in"/>
+            <input type="submit" value="Войти"/>
         </form>
     </body>
 </html>

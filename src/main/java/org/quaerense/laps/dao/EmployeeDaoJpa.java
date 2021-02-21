@@ -8,7 +8,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
-public class EmployeeDaoImpl implements EmployeeDao {
+public class EmployeeDaoJpa implements EmployeeDao {
     @PersistenceContext
     private EntityManager entityManager;
 

@@ -1,10 +1,12 @@
 package org.quaerense.laps.domain;
 
 import javax.persistence.*;
-import java.util.Set;
+import javax.validation.constraints.Positive;
+import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
-@Table(name = "profession")
+@Table(name = "professions")
 public class Profession {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,18 +16,27 @@ public class Profession {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "profession", fetch = FetchType.EAGER)
-    private Set<Employee> employees;
+    @Positive
+    @Column(name = "salary", nullable = false, precision = 10, scale = 2)
+    private BigDecimal salary;
 
-    @ManyToMany(mappedBy = "profession")
-    private Set<Role> roles;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "structural_subdivision_id")
+    private StructuralSubdivision structuralSubdivision;
+
+    @OneToMany(mappedBy = "profession")
+    private List<Employee> employees;
+
+    @ManyToMany(mappedBy = "professions")
+    private List<Role> roles;
 
     public Profession() {
     }
 
-    public Profession(Long id, String name, Set<Employee> employees, Set<Role> roles) {
-        this.id = id;
+    public Profession(String name, @Positive BigDecimal salary, StructuralSubdivision structuralSubdivision, List<Employee> employees, List<Role> roles) {
         this.name = name;
+        this.salary = salary;
+        this.structuralSubdivision = structuralSubdivision;
         this.employees = employees;
         this.roles = roles;
     }
@@ -46,19 +57,35 @@ public class Profession {
         this.name = name;
     }
 
-    public Set<Employee> getEmployees() {
+    public BigDecimal getSalary() {
+        return salary;
+    }
+
+    public void setSalary(BigDecimal salary) {
+        this.salary = salary;
+    }
+
+    public StructuralSubdivision getStructuralSubdivision() {
+        return structuralSubdivision;
+    }
+
+    public void setStructuralSubdivision(StructuralSubdivision structuralSubdivision) {
+        this.structuralSubdivision = structuralSubdivision;
+    }
+
+    public List<Employee> getEmployees() {
         return employees;
     }
 
-    public void setEmployees(Set<Employee> employees) {
+    public void setEmployees(List<Employee> employees) {
         this.employees = employees;
     }
 
-    public Set<Role> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 }

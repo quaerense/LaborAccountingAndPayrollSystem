@@ -4,17 +4,13 @@ import org.quaerense.laps.dao.DateDao;
 import org.quaerense.laps.dao.EmployeeDao;
 import org.quaerense.laps.domain.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.File;
 import java.util.List;
 
 @Service
-@PropertySource("classpath:application.properties")
 public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private EmployeeDao employeeDao;
@@ -25,21 +21,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Autowired
-    private Environment environment;
-
     @Override
     @Transactional
     public void addEmployee(Employee employee) {
-        String pathToUserFilesFolder = environment.getProperty("user.files.directory") + "/" + employee.getUsername();
-
-        employee.setUsername(employee.getUsername().toLowerCase());
+        employee.setUsername(employee.getUsername().trim().toLowerCase());
         employee.setPassword(bCryptPasswordEncoder.encode(employee.getPassword()));
         employee.setDateOfEmployment(dateDao.getCurrentDate());
 
         employeeDao.addEmployee(employee);
-
-        new File(pathToUserFilesFolder).mkdirs();
     }
 
     @Override
